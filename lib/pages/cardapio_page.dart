@@ -19,24 +19,11 @@ class _CardapioPageState extends State<CardapioPage> {
 
 searchAppBar() {
   return (AppBar(
-    title: Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        Container(
-          margin: EdgeInsets.only(left: 85),
-          child: Text(
-            "Gratinatti",
-            style: TextStyle(
-              color: Colors.black,
-            ),
-          ),
-        ),
-        Image.asset(
-          "assets/img/logo.png",
-          height: 30,
-        )
-      ],
+    title: Image.asset(
+      "assets/img/logo.png",
+      height: 45,
     ),
+    centerTitle: true,
     bottom: PreferredSize(
       preferredSize: Size.fromHeight(68),
       child: Container(
@@ -48,7 +35,7 @@ searchAppBar() {
           keyboardType: TextInputType.text,
           decoration: InputDecoration(
             filled: true,
-            fillColor: Colors.white,
+            fillColor: Color(0xffF5F5F5),
             hintText: "Buscar",
             prefixIcon: Icon(Icons.search),
             border: OutlineInputBorder(
