@@ -13,13 +13,13 @@ class _SacolaPageState extends State<SacolaPage> {
     return Scaffold(
       backgroundColor: Colors.grey[300],
       appBar: appBar(),
-      body: body(),
+      body: body(context),
       bottomNavigationBar: bottomBar(context),
     );
   }
 }
 
-body() {
+body(context) {
   return ListView(
     children: [
       Padding(
@@ -260,7 +260,9 @@ body() {
             alignment: Alignment.center,
             primary: Color(0xffDE0D18),
           ),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.of(context).pushNamed("/historico");
+          },
           child: Text("Finalizar Pedido"),
         ),
       ),

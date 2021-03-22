@@ -19,7 +19,7 @@ body(context) {
   return Padding(
     padding: const EdgeInsets.only(top: 130),
     child: Center(
-      child: Column(
+      child: ListView(
         children: [
           Image.asset(
             "assets/img/logologin.png",
