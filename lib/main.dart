@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:pizzaria_app/pages/login_page.dart';
-import 'package:pizzaria_app/pages/pedido_page.dart';
-import 'package:pizzaria_app/pages/perfil_page.dart';
+
 import 'pages/cardapio_page.dart';
+import 'pages/historico_page.dart';
+import 'pages/login_page.dart';
+import 'pages/pedido_page.dart';
+import 'pages/perfil_page.dart';
+import 'pages/sacola_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -22,6 +25,8 @@ class MyApp extends StatelessWidget {
         "/pedido": (context) => PedidoPage(),
         "/perfil": (context) => PerfilPage(),
         "/login": (context) => LoginPage(),
+        "/historico": (context) => HistoricoPage(),
+        "/sacola": (context) => SacolaPage(),
       },
     );
   }

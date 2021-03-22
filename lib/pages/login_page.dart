@@ -10,12 +10,12 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xffDE0D18),
-      body: body(),
+      body: body(context),
     );
   }
 }
 
-body() {
+body(context) {
   return Padding(
     padding: const EdgeInsets.only(top: 130),
     child: Center(
@@ -105,7 +105,9 @@ body() {
                         borderRadius: BorderRadius.circular(5),
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).pushNamed("/cardapio");
+                    },
                     child: Text('Login'),
                   ),
                 ),
