@@ -17,7 +17,7 @@ bottomBar(context) {
             Navigator.of(context).pushNamed("/cardapio");
           }
           if (index == 1) {
-            Navigator.of(context).pushNamed("/pedido");
+            Navigator.of(context).pushNamed("/historico");
           }
           if (index == 2) {
             Navigator.of(context).pushNamed("/perfil");

@@ -62,7 +62,9 @@ body(context) {
         alignment: Alignment.bottomRight,
         child: FloatingActionButton(
           backgroundColor: Color(0xffDE0D18),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.of(context).pushNamed("/sacola");
+          },
           child: Image.asset(
             "assets/img/shopping-bag.png",
             width: 40,
