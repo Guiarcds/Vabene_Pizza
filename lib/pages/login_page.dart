@@ -6,16 +6,19 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final _formKey = GlobalKey<FormState>();
+  final _passKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xffDE0D18),
-      body: body(context),
+      body: body(context, _formKey, _passKey),
     );
   }
 }
 
-body(context) {
+body(context, _formKey, _passKey) {
   return Padding(
     padding: const EdgeInsets.only(top: 130),
     child: Center(
@@ -31,18 +34,31 @@ body(context) {
                 Container(
                   width: 390,
                   padding: EdgeInsets.only(top: 30, bottom: 30),
-                  child: TextFormField(
-                    keyboardType: TextInputType.emailAddress,
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Color(0xffF5F5F5),
-                      prefixIcon: Icon(Icons.person),
-                      hintText: 'Email',
-                      hintStyle: TextStyle(
-                        color: Color(0xff8C8B8B),
-                      ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8.0),
+                  child: Form(
+                    key: _formKey,
+                    child: TextFormField(
+                      validator: (value) {
+                        if (value.isEmpty || value == null) {
+                          return 'Preencha o campo Email!';
+                        }
+                        if (value != 'admin') {
+                          return 'Email Incorreto!';
+                        }
+                        return null;
+                      },
+                      keyboardType: TextInputType.emailAddress,
+                      decoration: InputDecoration(
+                        //decoration
+                        filled: true,
+                        fillColor: Color(0xffF5F5F5),
+                        prefixIcon: Icon(Icons.person),
+                        hintText: 'Email',
+                        hintStyle: TextStyle(
+                          color: Color(0xff8C8B8B),
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
                       ),
                     ),
                   ),
@@ -50,18 +66,30 @@ body(context) {
                 Container(
                   width: 390,
                   padding: EdgeInsets.only(bottom: 25),
-                  child: TextFormField(
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Color(0xffF5F5F5),
-                      prefixIcon: Icon(Icons.lock),
-                      hintText: 'Senha',
-                      hintStyle: TextStyle(
-                        color: Color(0xff8C8B8B),
-                      ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8.0),
+                  child: Form(
+                    key: _passKey,
+                    child: TextFormField(
+                      validator: (value) {
+                        if (value.isEmpty || value == null) {
+                          return 'Preencha o campo Senha!';
+                        }
+                        if (value != 'admin') {
+                          return 'Senha Incorreta!';
+                        }
+                        return null;
+                      },
+                      obscureText: true,
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Color(0xffF5F5F5),
+                        prefixIcon: Icon(Icons.lock),
+                        hintText: 'Senha',
+                        hintStyle: TextStyle(
+                          color: Color(0xff8C8B8B),
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
                       ),
                     ),
                   ),
@@ -106,7 +134,11 @@ body(context) {
                       ),
                     ),
                     onPressed: () {
-                      Navigator.of(context).pushNamed("/cardapio");
+                      if (_formKey.currentState.validate()) {
+                        if (_passKey.currentState.validate()) {
+                          Navigator.of(context).pushNamed("/cardapio");
+                        }
+                      }
                     },
                     child: Text('Login'),
                   ),
