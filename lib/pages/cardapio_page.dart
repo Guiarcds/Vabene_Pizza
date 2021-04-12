@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pizzaria_app/widgets/bottombar.dart';
+import 'package:pizzaria_app/widgets/floatingActionButton.dart';
 
 class CardapioPage extends StatefulWidget {
   @override
@@ -10,6 +11,7 @@ class _CardapioPageState extends State<CardapioPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: floatingButton(context),
       appBar: searchAppBar(),
       body: body(context),
       bottomNavigationBar: bottomBar(context),
@@ -57,20 +59,6 @@ body(context) {
           preco: "2.00",
           descricao: "Tem um moi de coisa",
           context: context),
-      Container(
-        margin: EdgeInsets.only(right: 30, top: 432),
-        alignment: Alignment.bottomRight,
-        child: FloatingActionButton(
-          backgroundColor: Color(0xffDE0D18),
-          onPressed: () {
-            Navigator.of(context).pushNamed("/sacola");
-          },
-          child: Image.asset(
-            "assets/img/shopping-bag.png",
-            width: 40,
-          ),
-        ),
-      ),
     ],
   );
 }
