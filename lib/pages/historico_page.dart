@@ -1,12 +1,10 @@
-import 'dart:js';
-
 import 'package:flutter/material.dart';
 
 import 'package:pizzaria_app/widgets/appBar.dart';
 import 'package:pizzaria_app/widgets/bottomBar.dart';
 
 class HistoricoPage extends StatelessWidget {
-  List<Map<String, dynamic>> pedidos = [];
+  // List<Map<String, dynamic>> pedidos = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(

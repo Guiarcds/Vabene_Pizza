@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:pizzaria_app/BD/produtos_dao.dart';
 import 'package:pizzaria_app/widgets/bottombar.dart';
 import 'package:pizzaria_app/widgets/floatingActionButton.dart';
+import '../domain/produto.dart';
 
 class CardapioPage extends StatefulWidget {
   @override
@@ -8,12 +10,20 @@ class CardapioPage extends StatefulWidget {
 }
 
 class _CardapioPageState extends State<CardapioPage> {
+  Future<List<Produto>> listaProdutos;
+  @override
+  void initState() {
+    super.initState();
+    listaProdutos = ProdutosDao().obterProdutos();
+    print(listaProdutos.toString());
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: floatingButton(context),
       appBar: searchAppBar(),
-      body: body(context),
+      body: body(listaProdutos),
       bottomNavigationBar: bottomBar(context),
     );
   }
@@ -50,20 +60,35 @@ searchAppBar() {
   ));
 }
 
-body(context) {
-  return ListView(
-    children: [
-      card(
-          img: "assets/img/arepa.jpg",
-          title: "Arepa",
-          preco: "2.00",
-          descricao: "Tem um moi de coisa",
-          context: context),
-    ],
-  );
+body(Future<List<Produto>> listaProdutos) {
+  return Padding(
+      padding: EdgeInsets.all(16),
+      child: FutureBuilder<List<Produto>>(
+        future: listaProdutos,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return buildListView(snapshot.data);
+          }
+
+          return Center(child: CircularProgressIndicator());
+        },
+      ));
 }
 
-card({img, title, preco, descricao, context}) {
+buildListView(List<Produto> produtos) {
+  return ListView.builder(
+      itemCount: produtos.length,
+      itemBuilder: (BuildContext context, int index) {
+        return card(
+            img: produtos[index].img,
+            nome: produtos[index].nome,
+            preco: produtos[index].preco,
+            descricao: produtos[index].descricao,
+            context: context);
+      });
+}
+
+card({img, nome, preco, descricao, context}) {
   return GestureDetector(
     onTap: () {
       Navigator.of(context).pushNamed("/pedido");
@@ -89,7 +114,7 @@ card({img, title, preco, descricao, context}) {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      title,
+                      nome,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                       ),
@@ -97,7 +122,7 @@ card({img, title, preco, descricao, context}) {
                     Row(
                       children: [
                         Text(
-                          "R\$ " + preco,
+                          "R\$ " + preco.toString(),
                         ),
                         Icon(
                           Icons.arrow_forward_ios_rounded,

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'pages/cardapio_page.dart';
 import 'pages/historico_page.dart';
 import 'pages/login_page.dart';
@@ -19,7 +18,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Color(0xffDE0D18),
       ),
       debugShowCheckedModeBanner: false,
-      initialRoute: "/login",
+      initialRoute: "/sacola",
       routes: {
         "/cardapio": (context) => CardapioPage(),
         "/pedido": (context) => PedidoPage(),
