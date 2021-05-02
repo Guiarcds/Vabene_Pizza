@@ -5,6 +5,7 @@ import 'pages/login_page.dart';
 import 'pages/pedido_page.dart';
 import 'pages/perfil_page.dart';
 import 'pages/sacola_page.dart';
+import 'pages/map_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Color(0xffDE0D18),
       ),
       debugShowCheckedModeBanner: false,
-      initialRoute: "/sacola",
+      initialRoute: "/login",
       routes: {
         "/cardapio": (context) => CardapioPage(),
         "/pedido": (context) => PedidoPage(),
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
         "/login": (context) => LoginPage(),
         "/historico": (context) => HistoricoPage(),
         "/sacola": (context) => SacolaPage(),
+        "/mapa": (context) => MapPage(),
       },
     );
   }

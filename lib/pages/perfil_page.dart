@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pizzaria_app/pages/login_page.dart';
 import 'package:pizzaria_app/widgets/appBar.dart';
-import 'package:pizzaria_app/widgets/bottomBar.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class PerfilPage extends StatefulWidget {
@@ -12,14 +12,13 @@ class _PerfilPageState extends State<PerfilPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar(),
-      bottomNavigationBar: bottomBar(context),
-      body: body(),
+      appBar: appBar(context),
+      body: body(context),
     );
   }
 }
 
-body() {
+body(context) {
   return ListView(
     children: [
       Padding(
@@ -84,7 +83,42 @@ body() {
             ),
           ],
         ),
-      )
+      ),
+      Column(
+        children: [
+          Container(
+            width: 160,
+            height: 65,
+            child: Padding(
+              padding: EdgeInsets.only(),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Color(0xffDE0D18),
+                  shape: RoundedRectangleBorder(
+                    side: BorderSide(
+                      color: Color(0xffF5F5F5),
+                    ),
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                ),
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) => LoginPage()));
+                },
+                child: Text(
+                  'Log Out',
+                  style: TextStyle(
+                    color: Color(0xffE1E1E1),
+                    fontSize: 16,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
     ],
   );
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-appBar() {
+appBar(context) {
   return (AppBar(
     flexibleSpace: Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -19,6 +19,12 @@ appBar() {
       child: SizedBox(
         height: 10,
       ),
+    ),
+    leading: GestureDetector(
+      onTap: () {
+        Navigator.pop(context);
+      },
+      child: Icon(Icons.arrow_back),
     ),
   ));
 }

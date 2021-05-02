@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:pizzaria_app/pages/cardapio_page.dart';
+import 'package:pizzaria_app/pages/map_page.dart';
 import 'package:pizzaria_app/widgets/appBar.dart';
-import 'package:pizzaria_app/widgets/bottomBar.dart';
+import 'package:geocoding/geocoding.dart';
 import '../api/cepApi.dart';
 import '../domain/endereco.dart';
 
@@ -20,9 +22,8 @@ class _SacolaPageState extends State<SacolaPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[300],
-      appBar: appBar(),
+      appBar: appBar(context),
       body: body(context),
-      bottomNavigationBar: bottomBar(context),
     );
   }
 
@@ -34,6 +35,19 @@ class _SacolaPageState extends State<SacolaPage> {
       bairro = local.bairro;
       cidade = local.localidade;
     });
+  }
+
+  Future<void> mapOnPressed() async {
+    List<Location> locations = await locationFromAddress(rua);
+
+    double lat = locations[0].latitude;
+    double long = locations[0].longitude;
+
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (BuildContext context) =>
+                MapPage(latitude: lat, longitude: long)));
   }
 
   body(context) {
@@ -84,7 +98,8 @@ class _SacolaPageState extends State<SacolaPage> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.only(
+                      top: 8, left: 1, bottom: 8, right: 3),
                   child: Row(
                     children: [
                       Icon(
@@ -115,7 +130,7 @@ class _SacolaPageState extends State<SacolaPage> {
                 Row(
                   children: [
                     Text(
-                      "PIZZA DE CALABRESA - tamanho G",
+                      "AREPA - TAMANHO P",
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                     ),
@@ -124,12 +139,13 @@ class _SacolaPageState extends State<SacolaPage> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    "Calabresa, cebola e mussarela",
+                    "Um moi de coisa",
                     style: TextStyle(),
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.only(
+                      top: 8, left: 1, bottom: 8, right: 3),
                   child: Row(
                     children: [
                       Icon(
@@ -138,7 +154,7 @@ class _SacolaPageState extends State<SacolaPage> {
                       Container(
                         margin: EdgeInsets.only(left: 5, right: 5),
                         child: Text(
-                          "1",
+                          "6",
                         ),
                       ),
                       Icon(
@@ -160,7 +176,8 @@ class _SacolaPageState extends State<SacolaPage> {
         ),
         Card(
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding:
+                const EdgeInsets.only(bottom: 10, top: 1, left: 1, right: 1),
             child: Column(
               children: [
                 Row(
@@ -202,42 +219,79 @@ class _SacolaPageState extends State<SacolaPage> {
                         ),
                       ),
                       Container(
-                        width: 100,
-                        height: 60,
-                        child: Padding(
-                          padding: EdgeInsets.only(top: 15, bottom: 2),
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              primary: Color(0xffDE0D18),
-                              shape: RoundedRectangleBorder(
-                                side: BorderSide(
-                                  color: Color(0xffF5F5F5),
+                        child: Row(
+                          children: <Widget>[
+                            Expanded(
+                              child: Center(
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    primary: Color(0xffDE0D18),
+                                    shape: RoundedRectangleBorder(
+                                      side: BorderSide(
+                                        color: Color(0xffF5F5F5),
+                                      ),
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                  ),
+                                  onPressed: () {
+                                    useUrl(controller.text);
+                                  },
+                                  child: Text('  Inserir  '),
                                 ),
-                                borderRadius: BorderRadius.circular(10),
                               ),
                             ),
-                            onPressed: () {
-                              useUrl(controller.text);
-                            },
-                            child: Text('Inserir CEP'),
-                          ),
+                            Expanded(
+                              child: Center(
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    primary: Color(0xffDE0D18),
+                                    shape: RoundedRectangleBorder(
+                                      side: BorderSide(
+                                        color: Color(0xffF5F5F5),
+                                      ),
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                  ),
+                                  onPressed: mapOnPressed,
+                                  child: Text('Distância'),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                      Container(
-                        width: 500,
-                        height: 60,
-                        child: Padding(
-                          padding: EdgeInsets.only(top: 3),
-                          child: Expanded(
-                            child: Column(
-                              children: [
-                                Text('Logradouro: $rua'),
-                                Text('Bairro: $bairro'),
-                                Text('Cidade: $cidade'),
-                              ],
+                    ],
+                  ),
+                ),
+                Container(
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Center(
+                              child: Text('Rua: $rua'),
                             ),
                           ),
-                        ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Center(
+                              child: Text('Bairro: $bairro'),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Center(
+                              child: Text('Cidade: $cidade'),
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
@@ -288,7 +342,7 @@ class _SacolaPageState extends State<SacolaPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("1 PIZZA DE CALABRESA -G"),
+                    Text("6 AREPAs"),
                     Text("R\$30,00"),
                   ],
                 ),
@@ -323,17 +377,20 @@ class _SacolaPageState extends State<SacolaPage> {
         ),
         Container(
           margin: EdgeInsets.only(
-            bottom: 30,
+            bottom: 20,
           ),
           height: 50,
-          width: 50,
+          width: 200,
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
               alignment: Alignment.center,
               primary: Color(0xffDE0D18),
             ),
             onPressed: () {
-              Navigator.of(context).pushNamed("/historico");
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext context) => CardapioPage()));
             },
             child: Text("Finalizar Pedido"),
           ),

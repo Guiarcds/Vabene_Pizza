@@ -20,11 +20,11 @@ class ProdutosDB {
 
   _onCreate(Database db, int version) async {
     String sql =
-        'create table produtos (id INTEGER PRIMARY KEY, img VARCHAR(500), nome VARCHAR(100), preco DOUBLE, descricao VARCHAR(500));';
+        'create table produtos (id INTEGER PRIMARY KEY, img VARCHAR(500),  nome VARCHAR(100), preco DOUBLE, descricao VARCHAR(500));';
     await db.execute(sql);
 
     sql =
-        "INSERT INTO produtos VALUES (1, 'assets/img/arepa.png', 'Arepa', 5.00, 'Parece um taco tem um monte de coisa');";
+        "INSERT INTO produtos VALUES (1,'assets/img/arepa.jpg', 'Arepa', 5.00, 'Parece um taco tem um monte de coisa');";
     await db.execute(sql);
   }
 }

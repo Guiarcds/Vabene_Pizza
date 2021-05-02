@@ -22,14 +22,41 @@ class _CardapioPageState extends State<CardapioPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: floatingButton(context),
-      appBar: searchAppBar(),
+      appBar: searchAppBar(AppBar(
+        title: Image.asset(
+          "assets/img/logo.png",
+          height: 45,
+        ),
+        centerTitle: true,
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(68),
+          child: Container(
+            padding: EdgeInsets.only(bottom: 20),
+            width: 300,
+            height: 60,
+            child: TextField(
+              textAlignVertical: TextAlignVertical.bottom,
+              keyboardType: TextInputType.text,
+              decoration: InputDecoration(
+                filled: true,
+                fillColor: Color(0xffF5F5F5),
+                hintText: "Buscar",
+                prefixIcon: Icon(Icons.search),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(15),
+                ),
+              ),
+            ),
+          ),
+        ),
+      )),
       body: body(listaProdutos),
       bottomNavigationBar: bottomBar(context),
     );
   }
 }
 
-searchAppBar() {
+searchAppBar(context) {
   return (AppBar(
     title: Image.asset(
       "assets/img/logo.png",
@@ -96,9 +123,10 @@ card({img, nome, preco, descricao, context}) {
     child: Card(
       child: Row(
         children: [
-          Image.asset(
-            img,
-            height: 80,
+          Expanded(
+            child: Image.asset(
+              img,
+            ),
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,

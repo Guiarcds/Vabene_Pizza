@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
 
 import 'package:pizzaria_app/widgets/appBar.dart';
-import 'package:pizzaria_app/widgets/bottomBar.dart';
 
 class HistoricoPage extends StatelessWidget {
   // List<Map<String, dynamic>> pedidos = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar(),
+      appBar: appBar(context),
       body: Container(
         child: Center(
           child: Text("EM CONSTRUÇÃO"),
         ),
       ),
-      bottomNavigationBar: bottomBar(context),
     );
   }
 }
@@ -64,5 +62,5 @@ body(pedidos, context) {
 }
 
 // card(){
-//   return 
+//   return
 // }

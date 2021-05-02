@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:pizzaria_app/pages/perfil_page.dart';
 
 bottomBar(context) {
   return Container(
@@ -14,24 +15,16 @@ bottomBar(context) {
         elevation: 100,
         onTap: (index) {
           if (index == 0) {
-            Navigator.of(context).pushNamed("/cardapio");
-          }
-          if (index == 1) {
             Navigator.of(context).pushNamed("/historico");
           }
-          if (index == 2) {
-            Navigator.of(context).pushNamed("/perfil");
+          if (index == 1) {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (BuildContext context) => PerfilPage()));
           }
         },
         items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.shopping_cart_outlined,
-              size: 35,
-              color: Colors.black,
-            ),
-            label: 'Comprar',
-          ),
           BottomNavigationBarItem(
             icon: Icon(
               Icons.article_outlined,

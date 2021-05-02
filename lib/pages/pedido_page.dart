@@ -1,8 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pizzaria_app/pages/sacola_page.dart';
 import 'package:pizzaria_app/widgets/appBar.dart';
-import 'package:pizzaria_app/widgets/bottomBar.dart';
-import 'package:pizzaria_app/widgets/floatingActionButton.dart';
 
 class PedidoPage extends StatefulWidget {
   @override
@@ -13,9 +12,7 @@ class _PedidoPageState extends State<PedidoPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: floatingButton(context),
-      appBar: appBar(),
-      bottomNavigationBar: bottomBar(context),
+      appBar: appBar(context),
       body: body(context),
     );
   }
@@ -115,6 +112,38 @@ body(context) {
       ),
       SizedBox(
         height: 120,
+      ),
+      Column(
+        children: [
+          Container(
+            width: 300,
+            height: 65,
+            child: Padding(
+              padding: EdgeInsets.only(),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Color(0xffDE0D18),
+                  shape: RoundedRectangleBorder(
+                    side: BorderSide(
+                      color: Color(0xffF5F5F5),
+                    ),
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text(
+                  'Adicionar ao Carrinho',
+                  style: TextStyle(
+                    color: Color(0xffE1E1E1),
+                    fontSize: 16,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     ],
   );

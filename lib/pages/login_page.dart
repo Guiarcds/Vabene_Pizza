@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pizzaria_app/pages/cardapio_page.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -26,7 +27,8 @@ body(context, _formKey, _passKey) {
         children: [
           Image.asset(
             "assets/img/logologin.png",
-            width: 280,
+            width: 140,
+            height: 140,
           ),
           Container(
             child: Column(
@@ -98,14 +100,14 @@ body(context, _formKey, _passKey) {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(right: 55, bottom: 40),
+                      padding: const EdgeInsets.only(right: 20, bottom: 40),
                       child: GestureDetector(
                         onTap: () {},
                         child: Text(
                           'Esqueceu Sua Senha?',
                           style: TextStyle(
                             color: Color(0xffE1E1E1),
-                            fontSize: 15,
+                            fontSize: 13,
                             decoration: TextDecoration.underline,
                           ),
                         ),
@@ -120,7 +122,7 @@ body(context, _formKey, _passKey) {
             children: [
               Container(
                 width: 160,
-                height: 50,
+                height: 65,
                 child: Padding(
                   padding: EdgeInsets.only(),
                   child: ElevatedButton(
@@ -136,11 +138,21 @@ body(context, _formKey, _passKey) {
                     onPressed: () {
                       if (_formKey.currentState.validate()) {
                         if (_passKey.currentState.validate()) {
-                          Navigator.of(context).pushNamed("/cardapio");
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      CardapioPage()));
                         }
                       }
                     },
-                    child: Text('Login'),
+                    child: Text(
+                      'Login',
+                      style: TextStyle(
+                        color: Color(0xffE1E1E1),
+                        fontSize: 16,
+                      ),
+                    ),
                   ),
                 ),
               ),
@@ -157,7 +169,7 @@ body(context, _formKey, _passKey) {
                     'Ainda Não Possuo Conta!',
                     style: TextStyle(
                       color: Color(0xffE1E1E1),
-                      fontSize: 15,
+                      fontSize: 14,
                       decoration: TextDecoration.underline,
                     ),
                   ),
